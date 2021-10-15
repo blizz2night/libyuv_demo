@@ -19,6 +19,8 @@ import java.nio.ByteBuffer;
 
 import static org.junit.Assert.*;
 
+import com.nothing.yuvutils.YuvUtils;
+
 /**
  * Instrumented test, which will execute on an Android device.
  *
@@ -27,8 +29,11 @@ import static org.junit.Assert.*;
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
     private static final String TAG = "ExampleInstrumentedTest";
+
+
+
     @Test
-    public void useAppContext() {
+    public void ARGB2ABGR() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
@@ -39,8 +44,7 @@ public class ExampleInstrumentedTest {
         ByteBuffer buf = ByteBuffer.allocate(bitmap.getByteCount());
         bitmap.copyPixelsToBuffer(buf);
         byte[] array = buf.array();
-        byte[] bytes =
-                YuvUtils.ARGB2ABGR(array, bitmap.getWidth(), bitmap.getHeight());
+        byte[] bytes = YuvUtils.ARGB2ABGR(array, bitmap.getWidth(), bitmap.getHeight());
         Log.i(TAG, "useAppContext: " + bytes.length);
         ByteBuffer wrap = ByteBuffer.wrap(bytes);
         bitmap.copyPixelsFromBuffer(wrap);
